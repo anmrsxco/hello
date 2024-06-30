@@ -615,6 +615,7 @@ export function showLrcBox() {
 //进度条
 // 进度条歌词
 $lrcProgressBar
+  .find('.probox')
   .on('mousemove', function (e) {
     const x = e.clientX,
       left = pro1.offsetLeft + getMusicPlayerOffsetLeft(),
@@ -623,7 +624,7 @@ $lrcProgressBar
       idx = getMinIndex(lrcList.map((item) => Math.abs(time - item.t))),
       lrc = lrcList[idx];
     if (lrc) {
-      const str = `${lrc.p || ''}${
+      const str = `${formartSongTime(time)}${lrc.p ? `\n${lrc.p}` : ''}${
         _getData('showSongTranslation') && lrc.fy ? `\n${lrc.fy}` : ''
       }`;
       toolTip.setTip(str).show();

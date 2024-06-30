@@ -539,6 +539,7 @@ $myAudio
   });
 //进度条
 $lrcProgressBar
+  .find('.probox')
   .on('mousemove', function (e) {
     const x = e.clientX,
       left = pro1.offsetLeft + $musicPlayerWrap[0].offsetLeft,
@@ -549,7 +550,7 @@ $lrcProgressBar
       ),
       lrc = $myAudio._lrcList[idx];
     if (lrc) {
-      const str = `${lrc.p || ''}${
+      const str = `${formartSongTime(time)}${lrc.p ? `\n${lrc.p}` : ''}${
         _getData('showSongTranslation') && lrc.fy ? `\n${lrc.fy}` : ''
       }`;
       toolTip.setTip(str).show();
