@@ -908,17 +908,27 @@ function chatMsgMenu(e, cobj) {
   rMenu.selectMenu(
     e,
     data,
-    ({ close, id }) => {
+    ({ close, id, e }) => {
       if (id == '4') {
-        reqChatDeleteMsg({ id: tt, acc: chatAcc })
-          .then((result) => {
-            if (parseInt(result.code) === 0) {
-              close();
-              _msg.success(result.codeText);
-              return;
+        _pop(
+          {
+            e,
+            text: `确认撤回：消息？`,
+          },
+          (type) => {
+            if (type == 'confirm') {
+              reqChatDeleteMsg({ id: tt, acc: chatAcc })
+                .then((result) => {
+                  if (parseInt(result.code) === 0) {
+                    close();
+                    _msg.success(result.codeText);
+                    return;
+                  }
+                })
+                .catch(() => {});
             }
-          })
-          .catch(() => {});
+          }
+        );
       } else if (id == '1') {
         copyText(z);
         close();
